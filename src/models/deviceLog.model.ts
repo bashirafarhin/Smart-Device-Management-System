@@ -26,9 +26,8 @@ const DeviceLogSchema: Schema<IDeviceLog> = new Schema<IDeviceLog>(
 
 DeviceLogSchema.plugin(AutoIncrement, { inc_field: "id" });
 
-const DeviceLog: Model<IDeviceLog> = mongoose.model<IDeviceLog>(
-  "DeviceLog",
-  DeviceLogSchema
-);
+const DeviceLog: Model<IDeviceLog> =
+  mongoose.models.DeviceLog ||
+  mongoose.model<IDeviceLog>("DeviceLog", DeviceLogSchema);
 
 export default DeviceLog;

@@ -51,5 +51,6 @@ DeviceSchema.plugin(AutoIncrement, {
   id: "device_id_counter",
 });
 
-const Device: Model<IDevice> = mongoose.model<IDevice>("Device", DeviceSchema);
+const Device: Model<IDevice> =
+  mongoose.models.Device || mongoose.model<IDevice>("Device", DeviceSchema);
 export default Device;

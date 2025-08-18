@@ -54,7 +54,7 @@ export const validateRole = (
 };
 
 interface JwtPayload {
-  id: number; // from your login token
+  id: number;
   email: string;
   role: string;
 }

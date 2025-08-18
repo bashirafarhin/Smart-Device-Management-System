@@ -56,3 +56,19 @@ export const updateHeartbeat = async (
   await device.save();
   return device.last_active_at!;
 };
+
+export const findInactiveDevices = async (cutoff: Date): Promise<number[]> => {
+  const devices = await Device.find(
+    { last_active_at: { $lt: cutoff }, status: "active" },
+    { id: 1, _id: 0 }
+  );
+  return devices.map((d) => d.id);
+};
+
+export const deactivateDevice = async (deviceId: number) => {
+  const device = await Device.findOne({ id: deviceId });
+  if (device) {
+    device.status = "inactive";
+    await device.save();
+  }
+};
