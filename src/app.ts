@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import { errorHandler } from "./utils/errorHandler";
 import cookieParser from "cookie-parser";
 import authRoutes from "./routes/auth.route";
+import deviceRoutes from "./routes/device.route";
 dotenv.config();
 
 const app = express();
@@ -18,6 +19,7 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use("/auth", authRoutes);
+app.use("/devices", deviceRoutes);
 app.use(errorHandler);
 
 app.get("/", (_req, res) => {

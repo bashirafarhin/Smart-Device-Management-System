@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import { check, validationResult } from "express-validator";
 import { AppError } from "../utils/errorHandler";
+import jwt from "jsonwebtoken";
 
 export const validateSignup = [
   check("name").isLength({ min: 2 }).withMessage("Name is required"),
@@ -50,4 +51,37 @@ export const validateRole = (
     return next(new AppError("Role must be user", 400));
   }
   next();
+};
+
+interface JwtPayload {
+  id: number; // from your login token
+  email: string;
+  role: string;
+}
+
+export interface AuthRequest extends Request {
+  user?: JwtPayload;
+}
+
+export const authMiddleware = (
+  req: AuthRequest,
+  _res: Response,
+  next: NextFunction
+) => {
+  const authHeader = req.headers.authorization;
+
+  if (!authHeader || !authHeader.startsWith("Bearer ")) {
+    return next(new AppError("Unauthorized: No token provided", 401));
+  }
+  const token = authHeader.split(" ")[1];
+  try {
+    const decoded = jwt.verify(
+      token,
+      process.env.JWT_SECRET as string
+    ) as JwtPayload;
+    req.user = decoded;
+    next();
+  } catch (err) {
+    return next(new AppError("Unauthorized: Invalid token", 401));
+  }
 };

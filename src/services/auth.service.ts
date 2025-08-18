@@ -1,6 +1,6 @@
 import User from "../models/user.model";
-import jwt from "jsonwebtoken";
 import { AppError } from "../utils/errorHandler";
+import { generateToken } from "../utils/jwt";
 
 export const registerUser = async (data: {
   name: string;
@@ -21,11 +21,11 @@ export const loginUser = async (email: string, password: string) => {
   const isMatch = await user.comparePassword(password);
   if (!isMatch) throw new AppError("Invalid email or password", 401);
 
-  const token = jwt.sign(
-    { id: user._id, role: user.role },
-    process.env.JWT_SECRET as string,
-    { expiresIn: "1h" }
-  );
+  const token = generateToken({
+    id: user.id,
+    email: user.email,
+    role: user.role,
+  });
 
   return {
     success: true,

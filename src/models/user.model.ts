@@ -5,7 +5,7 @@ import mongooseSequence from "mongoose-sequence";
 const AutoIncrement = mongooseSequence(mongoose);
 
 export interface IUser extends Document {
-  id: number; // auto-increment field
+  id: number;
   name: string;
   email: string;
   password: string;
@@ -48,7 +48,7 @@ const UserSchema: Schema<IUser> = new Schema<IUser>(
 );
 
 // plugin for auto-increment userId
-UserSchema.plugin(AutoIncrement, { inc_field: "id" });
+UserSchema.plugin(AutoIncrement, { inc_field: "id", id: "user_id_counter" });
 
 // hash password before save
 UserSchema.pre<IUser>("save", async function (next) {
