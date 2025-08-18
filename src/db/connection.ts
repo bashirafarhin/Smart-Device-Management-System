@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
-import { AppError } from "../utils/authHandler";
+import { AppError } from "../utils/errorHandler";
 
-const connectDB = async () => {
+const connectDB = async (): Promise<void> => {
   try {
     const uri = process.env.MONGODB_URI;
     if (!uri) {
@@ -10,11 +10,15 @@ const connectDB = async () => {
         500
       );
     }
+    mongoose.set("strictQuery", true);
     await mongoose.connect(uri);
-    console.log("MongoDB connected successfully");
+    console.log("✅ MongoDB connected successfully");
   } catch (error) {
-    console.error("MongoDB connection failed:", error);
+    console.error("❌ MongoDB connection failed:", error);
+
+    // rethrow for error handler OR exit
     throw new AppError("Failed to connect to MongoDB", 500);
+    // or process.exit(1); if you want to stop the app
   }
 };
 
