@@ -1,6 +1,6 @@
 import { check, validationResult } from "express-validator";
 import { Request, Response, NextFunction } from "express";
-import { AppError } from "../utils/errorHandler";
+import { AppError } from "../../utils/errorHandler";
 
 export const validateLogEntry = [
   check("event").notEmpty().withMessage("Event is required"),

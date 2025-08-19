@@ -5,7 +5,7 @@ import {
   validateSignup,
   validatePassword,
   validateRole,
-} from "../middlewares/auth.middleware";
+} from "../middlewares/validations/auth.validation";
 import { validateRequest } from "../utils/validateRequest";
 
 const router = Router();

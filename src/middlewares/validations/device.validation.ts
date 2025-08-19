@@ -1,6 +1,6 @@
 import { check } from "express-validator";
 import { Request, Response, NextFunction } from "express";
-import { AppError } from "../utils/errorHandler";
+import { AppError } from "../../utils/errorHandler";
 
 export const registerDeviceValidation = [
   check("name").notEmpty().withMessage("Device name is required"),

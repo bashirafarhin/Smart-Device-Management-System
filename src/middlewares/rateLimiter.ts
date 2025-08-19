@@ -3,7 +3,7 @@ import { redisClient } from "../config/redis";
 import { AuthRequest } from "./auth.middleware";
 
 const WINDOW_SIZE_IN_SECONDS = 60; // 1 minute
-const MAX_REQUESTS = 10;
+const MAX_REQUESTS = 100;
 
 export const rateLimiter = async (
   req: AuthRequest,

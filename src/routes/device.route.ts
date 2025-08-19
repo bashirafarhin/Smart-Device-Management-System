@@ -11,7 +11,7 @@ import {
   registerDeviceValidation,
   validateDeviceQuery,
   validateDeviceUpdate,
-} from "../middlewares/device.middleware";
+} from "../middlewares/validations/device.validation";
 import { validateRequest } from "../utils/validateRequest";
 
 // import for device logs
@@ -20,7 +20,7 @@ import {
   getDeviceLogs,
   getDeviceUsage,
 } from "../controllers/deviceLog.controller";
-import { validateLogEntry } from "../middlewares/deviceLog.middleware";
+import { validateLogEntry } from "../middlewares/validations/deviceLog.validation";
 
 const router = Router();
 
