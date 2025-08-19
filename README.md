@@ -10,11 +10,12 @@
 - **JWT + bcrypt**
 - **bcryptjs**
 - **express-validator**
-- **inngest**
+- **inngest**(to implement background job)
 - **jsonwebtoken**
 - **mongoose**
-- **redis**
-
+- **redis**(to implement rate limiting)
+- **Jest**(to implement unit testing)
+  
 ## 📬 Postman Collection
 
 You can explore and test the APIs using the Postman collection:
