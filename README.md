@@ -61,15 +61,15 @@ mongod
 npm test
 ```
 
-# 📖 API Documentation
+## 📖 API Documentation
 
 This document provides the API endpoints, payloads, and sample responses for the backend service.
 
-## 1. User Management
+### 1. User Management
 
-### **POST /auth/signup** → Create account
+#### **POST /auth/signup** → Create account
 
-#### Sample Payload
+##### Sample Payload
 
 ```json
 {
@@ -80,7 +80,7 @@ This document provides the API endpoints, payloads, and sample responses for the
 }
 ```
 
-#### Sample Response
+##### Sample Response
 
 ```json
 {
@@ -89,9 +89,9 @@ This document provides the API endpoints, payloads, and sample responses for the
 }
 ```
 
-### **POST /auth/login** → login account
+#### **POST /auth/login** → login account
 
-#### Sample Payload
+##### Sample Payload
 
 ```json
 {
@@ -100,7 +100,7 @@ This document provides the API endpoints, payloads, and sample responses for the
 }
 ```
 
-#### Sample Response
+##### Sample Response
 
 ```json
 {
@@ -115,7 +115,7 @@ This document provides the API endpoints, payloads, and sample responses for the
 }
 ```
 
-## 2. Device Management
+### 2. Device Management
 
 ⚠️ **Authentication Required**  
 All endpoints in this section require a valid JWT token in the request header:
@@ -127,9 +127,9 @@ Authorization: Bearer <your_jwt_token>
 Content-Type: application/json
 ```
 
-### **POST /devices** → Create device
+#### **POST /devices** → Create device
 
-#### Sample Payload
+##### Sample Payload
 
 ```json
 {
@@ -139,7 +139,7 @@ Content-Type: application/json
 }
 ```
 
-#### Sample Response
+##### Sample Response
 
 ```json
 {
@@ -155,9 +155,9 @@ Content-Type: application/json
 }
 ```
 
-### **GET /devices** → get all device
+#### **GET /devices** → get all device
 
-#### Sample Response
+##### Sample Response
 
 ```json
 {
@@ -175,11 +175,11 @@ Content-Type: application/json
 }
 ```
 
-### **PATCH /devices/:id** → Update device details
+#### **PATCH /devices/:id** → Update device details
 
 - You can update one or more fields of the device.
 
-#### Sample Payload
+##### Sample Payload
 
 ```json
 {
@@ -189,7 +189,7 @@ Content-Type: application/json
 }
 ```
 
-#### Sample Response
+##### Sample Response
 
 ```json
 {
@@ -205,9 +205,9 @@ Content-Type: application/json
 }
 ```
 
-### **Delete /devices/:id** → delete device
+#### **Delete /devices/:id** → delete device
 
-#### Sample Response
+##### Sample Response
 
 ```json
 {
@@ -216,9 +216,9 @@ Content-Type: application/json
 }
 ```
 
-### **Post /devices/:id/heartbeat** →
+#### **Post /devices/:id/heartbeat** →
 
-#### Sample Payload
+##### Sample Payload
 
 ```json
 {
@@ -226,7 +226,7 @@ Content-Type: application/json
 }
 ```
 
-#### Sample Response
+##### Sample Response
 
 ```json
 {
@@ -236,7 +236,7 @@ Content-Type: application/json
 }
 ```
 
-## 3. Data & Analytics
+### 3. Data & Analytics
 
 ⚠️ **Authentication Required**  
 All endpoints in this section require a valid JWT token in the request header:
@@ -248,9 +248,9 @@ Authorization: Bearer <your_jwt_token>
 Content-Type: application/json
 ```
 
-### **POST /devices/:id/logs** → Create log of a device
+#### **POST /devices/:id/logs** → Create log of a device
 
-#### Sample Payload
+##### Sample Payload
 
 ```json
 {
@@ -259,7 +259,7 @@ Content-Type: application/json
 }
 ```
 
-#### Sample Response
+##### Sample Response
 
 ```json
 {
@@ -274,20 +274,20 @@ Content-Type: application/json
 }
 ```
 
-### **GET /devices/:id/logs?limit={n}** → Fetch device logs
+#### **GET /devices/:id/logs?limit={n}** → Fetch device logs
 
 Returns the last `n` logs of a device.  
 The `limit` query parameter is optional. Defaults to `10`.
 
-#### Path Parameters
+##### Path Parameters
 
 - `id` (string): Device ID (e.g., `d3`).
 
-#### Query Parameters
+##### Query Parameters
 
 - `limit` (integer, optional): Number of logs to fetch. Default: 10.
 
-#### Sample Response
+##### Sample Response
 
 ```json
 {
@@ -309,22 +309,22 @@ The `limit` query parameter is optional. Defaults to `10`.
 }
 ```
 
-### **GET /devices/:id/usage?range={timeRange}** → Aggregated usage
+#### **GET /devices/:id/usage?range={timeRange}** → Aggregated usage
 
 Returns the total units consumed by a device within a given time range.  
 The `range` query parameter is optional. Defaults to `24h`.
 
-#### Path Parameters
+##### Path Parameters
 
 - `id` (string): Device ID (e.g., `d3`).
 
-#### Query Parameters
+##### Query Parameters
 
 - `range` (string, optional): Time range for aggregation.  
   Supported values: `1h`, `24h`, `7d`, etc.  
   Default: `24h`.
 
-#### Sample Response
+##### Sample Response
 
 ```json
 {
