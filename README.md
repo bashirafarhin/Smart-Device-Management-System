@@ -19,8 +19,9 @@
 
 You can explore and test the APIs using the Postman collection:
 
-- [Download Postman Collection](./SDMS.postman_collection.json)
-  > ⚠️ **Note:** After logging in, copy the generated JWT token and add it to the request headers (`Authorization: Bearer <your_jwt_token>`) when testing protected routes in Postman.
+⚠️ **Note:** After logging in, copy the generated JWT token and add it to the request headers (`Authorization: Bearer <your_jwt_token>`) when testing protected routes in Postman.
+
+[Download Postman Collection](./SDMS.postman_collection.json)
 
 ## ⚙️ Setup Instructions
 

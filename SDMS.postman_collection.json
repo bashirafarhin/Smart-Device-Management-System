@@ -1,349 +1,295 @@
 {
-	"info": {
-		"_postman_id": "4f00dc20-c3f5-4bef-80f6-c74d89f755c6",
-		"name": "SDMS",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "29100079"
-	},
-	"item": [
-		{
-			"name": "user",
-			"item": [
-				{
-					"name": "signup",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"name\": \"John Doe\",\r\n  \"email\": \"john@example.com\",\r\n  \"password\": \"Ba@123456\",\r\n  \"role\": \"user\"\r\n}\r\n",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:3000/auth/signup",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"auth",
-								"signup"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "login",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"email\": \"john@example.com\",\r\n  \"password\": \"Ba@123456\"\r\n}\r\n\r\n",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:3000/auth/login",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"auth",
-								"login"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "device",
-			"item": [
-				{
-					"name": "register device",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJqb2huQGV4YW1wbGUuY29tIiwicm9sZSI6InVzZXIiLCJpYXQiOjE3NTU1OTMyMTIsImV4cCI6MTc1NTY3OTYxMn0.0HyaVIGFGa9vybcVESP75tL3182z4F_wgw1bKxkD3sA",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"name\": \"Living Room Light\",\r\n  \"type\": \"light\",\r\n  \"status\": \"active\"\r\n}\r\n",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:3000/devices/",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"devices",
-								""
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "get device",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJqb2huQGV4YW1wbGUuY29tIiwicm9sZSI6InVzZXIiLCJpYXQiOjE3NTU1OTMyMTIsImV4cCI6MTc1NTY3OTYxMn0.0HyaVIGFGa9vybcVESP75tL3182z4F_wgw1bKxkD3sA",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "http://localhost:3000/devices/",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"devices",
-								""
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "update device details",
-					"request": {
-						"method": "PATCH",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJqb2huQGV4YW1wbGUuY29tIiwicm9sZSI6InVzZXIiLCJpYXQiOjE3NTU1OTMyMTIsImV4cCI6MTc1NTY3OTYxMn0.0HyaVIGFGa9vybcVESP75tL3182z4F_wgw1bKxkD3sA",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Living Room Light updated name\",\r\n    \"type\": \"light\",\r\n    \"status\": \"active\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:3000/devices/d1",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"devices",
-								"d1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "heartbeat",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJqb2huQGV4YW1wbGUuY29tIiwicm9sZSI6InVzZXIiLCJpYXQiOjE3NTU1OTMyMTIsImV4cCI6MTc1NTY3OTYxMn0.0HyaVIGFGa9vybcVESP75tL3182z4F_wgw1bKxkD3sA",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"status\": \"active\"\r\n}\r\n",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:3000/devices/d1/heartbeat",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"devices",
-								"d1",
-								"heartbeat"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "DeviceLogs",
-			"item": [
-				{
-					"name": "log entry",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJqb2huQGV4YW1wbGUuY29tIiwicm9sZSI6InVzZXIiLCJpYXQiOjE3NTU1OTMyMTIsImV4cCI6MTc1NTY3OTYxMn0.0HyaVIGFGa9vybcVESP75tL3182z4F_wgw1bKxkD3sA",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"event\": \"units_consumed\",\r\n  \"value\": 2.5\r\n}\r\n",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:3000/devices/d1/logs",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"devices",
-								"d1",
-								"logs"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "get logs",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJqb2huQGV4YW1wbGUuY29tIiwicm9sZSI6InVzZXIiLCJpYXQiOjE3NTU1MjA4OTUsImV4cCI6MTc1NTYwNzI5NX0.p1OVBI-AcpB4Hn2c8-ygoPIziMaxMpzyHY04KhNLP5I",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:3000/devices/d1/logs",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"devices",
-								"d1",
-								"logs"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "aggregated logs",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJqb2huQGV4YW1wbGUuY29tIiwicm9sZSI6InVzZXIiLCJpYXQiOjE3NTU1MjA4OTUsImV4cCI6MTc1NTYwNzI5NX0.p1OVBI-AcpB4Hn2c8-ygoPIziMaxMpzyHY04KhNLP5I",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "http://localhost:3000/devices/d1/usage?range=1h",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"devices",
-								"d1",
-								"usage"
-							],
-							"query": [
-								{
-									"key": "range",
-									"value": "1h"
-								}
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "delete device",
-			"request": {
-				"method": "DELETE",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJqb2huQGV4YW1wbGUuY29tIiwicm9sZSI6InVzZXIiLCJpYXQiOjE3NTU1OTI3NDEsImV4cCI6MTc1NTY3OTE0MX0.LKDxYWjmmVIeqJCVshw93V7O5YritoSSOgYOyWh768Y",
-						"type": "text"
-					}
-				],
-				"url": {
-					"raw": "http://localhost:3000/devices/d1",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"devices",
-						"d1"
-					]
-				}
-			},
-			"response": []
-		}
-	]
+  "info": {
+    "_postman_id": "4f00dc20-c3f5-4bef-80f6-c74d89f755c6",
+    "name": "SDMS",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "29100079"
+  },
+  "item": [
+    {
+      "name": "user",
+      "item": [
+        {
+          "name": "signup",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"John Doe\",\r\n  \"email\": \"john@example.com\",\r\n  \"password\": \"Ba@123456\",\r\n  \"role\": \"user\"\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/auth/signup",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["auth", "signup"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "login",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"email\": \"john@example.com\",\r\n  \"password\": \"Ba@123456\"\r\n}\r\n\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/auth/login",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["auth", "login"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "device",
+      "item": [
+        {
+          "name": "register device",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer <your_jwt_token>",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"Living Room Light\",\r\n  \"type\": \"light\",\r\n  \"status\": \"active\"\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/devices/",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["devices", ""]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get device",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer <your_jwt_token>",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:3000/devices/",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["devices", ""]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "update device details",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer <your_jwt_token>",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"Living Room Light updated name\",\r\n    \"type\": \"light\",\r\n    \"status\": \"active\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/devices/d1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["devices", "d1"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "heartbeat",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer <your_jwt_token>",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"status\": \"active\"\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/devices/d1/heartbeat",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["devices", "d1", "heartbeat"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "DeviceLogs",
+      "item": [
+        {
+          "name": "log entry",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer <your_jwt_token>",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"event\": \"units_consumed\",\r\n  \"value\": 2.5\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/devices/d1/logs",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["devices", "d1", "logs"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get logs",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer <your_jwt_token>",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/devices/d1/logs",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["devices", "d1", "logs"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "aggregated logs",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer <your_jwt_token>",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:3000/devices/d1/usage?range=1h",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["devices", "d1", "usage"],
+              "query": [
+                {
+                  "key": "range",
+                  "value": "1h"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "delete device",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer <your_jwt_token>",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:3000/devices/d1",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["devices", "d1"]
+        }
+      },
+      "response": []
+    }
+  ]
 }
