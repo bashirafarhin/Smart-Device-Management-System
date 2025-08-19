@@ -61,6 +61,10 @@ mongod
 npm test
 ```
 
+## 📌 Assumptions Made
+
+- The assignment did not explicitly mention whether the routes should be protected, but it was assumed that authentication is required for all protected resources (e.g., Device Management, Logs, Usage). Therefore, these routes are secured with JWT-based authentication.
+
 ## 📖 API Documentation
 
 This document provides the API endpoints, payloads, and sample responses for the backend service.
