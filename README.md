@@ -15,12 +15,20 @@
 - **mongoose**
 - **redis**
 
+## 📬 Postman Collection
+
+You can explore and test the APIs using the Postman collection:
+
+- [Download Postman Collection](./SDMS.postman_collection.json)
+  > ⚠️ **Note:** After logging in, copy the generated JWT token and add it to the request headers (`Authorization: Bearer <your_jwt_token>`) when testing protected routes in Postman.
+
 ## ⚙️ Setup Instructions
 
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/bashirafarhin/Smart-Device-Management-System
+git clone https://github.com/bashirafarhin/Smart-Device-Management-System.git
+cd ./Smart-Device-Management-System/
 ```
 
 ### 2. Install Dependencies
@@ -29,36 +37,38 @@ git clone https://github.com/bashirafarhin/Smart-Device-Management-System
 npm install/ npm i
 ```
 
-### 3. Configure Environment Variables
+### 3. Database Setup (MongoDB)
 
-```bash
-PORT=3000
-MONGO_URI=
-JWT_SECRET=your-secret-key
-
-```
-
-### 4. Run the Project in Development Mode
-
-```bash
-npm run dev
-```
-
-### 5. Database Setup (MongoDB)
-
-- Make sure MongoDB is running locally, or use a cloud service like MongoDB Atlas.
-- If using local MongoDB:
+- Go to your MongoDB server (e.g., [MongoDB Atlas](https://www.mongodb.com/atlas)) and create a cluster.
+- Copy the connection string (it looks like this:  
+  `mongodb+srv://<username>:<password>@cluster0.mongodb.net/your-db-name`).
+- Add it to your `.env` file:
+- If you prefer using local MongoDB, make sure it is running:
 
 ```bash
 mongod
 ```
 
-- If using MongoDB Atlas, update your .env MONGO_URI with the connection string from Atlas.
+### 4. Redis Setup
 
-### 6. Testing
+- Go to your Redis server (e.g., [Redis Cloud](https://redis.com/redis-enterprise-cloud/)) and create a database.
+- Copy the connection URL provided (it looks like this:  
+  `redis://default:<password>@<host>:<port>`).
+- Add it to your `.env` file:
+
+### 5. Configure Environment Variables
 
 ```bash
-npm test
+PORT=3000
+MONGO_URI=
+JWT_SECRET=your-secret-key
+REDIS_URL=
+```
+
+### 6. Run the Project in Development Mode
+
+```bash
+npm run dev
 ```
 
 ## 📌 Assumptions Made
