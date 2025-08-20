@@ -4,6 +4,7 @@ import { generateAccessToken, generateRefreshToken } from "../utils/jwt";
 import BlacklistToken from "../models/blacklistToken.model";
 import jwt from "jsonwebtoken";
 import { TokenPayload } from "../types/tokens";
+import { getFromCache, setToCache } from "../utils/cache";
 
 export const registerUser = async (data: {
   name: string;
@@ -18,9 +19,8 @@ export const registerUser = async (data: {
 };
 
 export const loginUser = async (email: string, password: string) => {
-  const user = await User.findOne({ email });
+  const user = await User.findOne({ email }).select("+password");
   if (!user) throw new AppError("Invalid email or password", 401);
-
   const isMatch = await user.comparePassword(password);
   if (!isMatch) throw new AppError("Invalid email or password", 401);
 
@@ -108,3 +108,20 @@ export async function refreshTokens(oldRefreshToken: string) {
     newAccessToken,
   };
 }
+
+export const getUserProfile = async (userId: string) => {
+  const cacheKey = `user-profile:${userId}`;
+
+  // Try cache first
+  const cachedProfile = await getFromCache(cacheKey);
+  if (cachedProfile) return cachedProfile;
+
+  // Cache miss: query DB
+  const userProfile = await User.findOne({ id: userId }).lean();
+  if (!userProfile) return null;
+
+  // Cache result
+  await setToCache(cacheKey, userProfile, 1800); // 30 minutes
+
+  return userProfile;
+};

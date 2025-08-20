@@ -4,6 +4,7 @@ import {
   signup,
   logout,
   refreshTokenHandler,
+  getProfile,
 } from "../controllers/auth.controller";
 
 import { check } from "express-validator";
@@ -20,7 +21,7 @@ const router = Router();
 
 const authRateLimiter = rateLimiter({
   endpoint: "auth",
-  rate_limit: { time: 15 * 60, limit: 5 }, // 5 requests per 15 minutes
+  rate_limit: { time: 1 * 60, limit: 10 }, // 10 requests per 1 minutes
 });
 
 router.post(
@@ -46,5 +47,7 @@ router.post(
 router.post("/logout", authMiddleware, authRateLimiter, logout);
 
 router.post("/refresh-token", authRateLimiter, refreshTokenHandler);
+
+router.get("/profile", authMiddleware, authRateLimiter, getProfile);
 
 export default router;

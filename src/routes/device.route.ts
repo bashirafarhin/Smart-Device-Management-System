@@ -27,7 +27,7 @@ const router = Router();
 
 const deviceRateLimiter = rateLimiter({
   endpoint: "device",
-  rate_limit: { time: 15 * 60, limit: 100 }, // 100 requests per 15 minutes
+  rate_limit: { time: 1 * 60, limit: 10 }, // 10 requests per 1 minutes
 });
 
 router.post(

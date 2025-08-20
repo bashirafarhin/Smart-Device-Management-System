@@ -1,5 +1,7 @@
 import Device, { IDevice } from "../models/device.model";
 import { AppError } from "../utils/errorHandler";
+import { getFromCache, setToCache } from "../utils/cache";
+import { redisClient } from "../config/redis.config";
 
 export const createDevice = async (
   name: string,
@@ -13,12 +15,23 @@ export const createDevice = async (
     status,
     owner_id: ownerId,
   });
-
+  await invalidateDeviceListingCache(ownerId);
   return device;
 };
 
 export const getDevices = async (filters: any): Promise<IDevice[]> => {
-  return Device.find(filters).sort({ createdAt: -1 });
+  const cacheKey = `device-listing:userId=${filters.owner_id}:type=${
+    filters.type || "all"
+  }:status=${filters.status || "all"}`;
+  // Try to read cached data
+  const cachedDevices = await getFromCache<IDevice[]>(cacheKey);
+  if (cachedDevices) {
+    return cachedDevices;
+  }
+  const devices = await Device.find(filters).sort({ createdAt: -1 }).lean();
+  // Store result in Redis cache, set TTL to 15 minutes (900 seconds)
+  await setToCache(cacheKey, devices, 900);
+  return devices;
 };
 
 export const updateDevice = async (
@@ -31,6 +44,7 @@ export const updateDevice = async (
 
   Object.assign(device, updateData);
   await device.save();
+  await invalidateDeviceListingCache(ownerId);
   return device;
 };
 
@@ -39,7 +53,11 @@ export const deleteDevice = async (deviceId: number, ownerId: number) => {
     id: deviceId,
     owner_id: ownerId,
   });
-  if (!deletedDevice) throw new AppError("Device not found", 404);
+  if (!deletedDevice) {
+    throw new AppError("Device not found", 404);
+  } else {
+    await invalidateDeviceListingCache(ownerId);
+  }
 };
 
 export const updateHeartbeat = async (
@@ -49,11 +67,10 @@ export const updateHeartbeat = async (
 ) => {
   const device = await Device.findOne({ id: deviceId, owner_id: ownerId });
   if (!device) throw new AppError("Device not found", 404);
-
   device.status = status;
   device.last_active_at = new Date();
-
   await device.save();
+  await invalidateDeviceListingCache(ownerId);
   return device.last_active_at!;
 };
 
@@ -72,3 +89,11 @@ export const deactivateDevice = async (deviceId: number) => {
     await device.save();
   }
 };
+
+export async function invalidateDeviceListingCache(ownerId: number) {
+  const pattern = `device-listing:userId=${ownerId}*`;
+  const keys = await redisClient.keys(pattern);
+  if (keys.length > 0) {
+    await redisClient.del(keys);
+  }
+}

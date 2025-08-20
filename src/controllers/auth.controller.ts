@@ -2,6 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import * as authService from "../services/auth.service";
 import jwt from "jsonwebtoken";
 import { blacklistToken } from "../services/auth.service";
+import { AuthRequest } from "../middlewares/auth.middleware";
 
 export const signup = async (
   req: Request,
@@ -109,5 +110,22 @@ export const refreshTokenHandler = async (req: Request, res: Response) => {
     return res
       .status(401)
       .json({ message: error.message || "Invalid refresh token" });
+  }
+};
+
+export const getProfile = async (req: AuthRequest, res: Response) => {
+  try {
+    const userId = req.user?.id;
+    if (!userId) {
+      return res.status(401).json({ message: "Unauthorized" });
+    }
+    const profile = await authService.getUserProfile(userId);
+    if (!profile) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    res.status(200).json({ success: true, data: profile });
+  } catch (error) {
+    console.error("Error fetching user profile:", error);
+    res.status(500).json({ message: "Internal server error" });
   }
 };
