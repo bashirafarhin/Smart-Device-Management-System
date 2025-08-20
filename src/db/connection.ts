@@ -11,14 +11,14 @@ const connectDB = async (): Promise<void> => {
       );
     }
     mongoose.set("strictQuery", true);
-    await mongoose.connect(uri);
+    await mongoose.connect(uri, {
+      maxPoolSize: 10, // limit connections on free tier
+      minPoolSize: 2,
+    });
     console.log("✅ MongoDB connected successfully");
   } catch (error) {
     console.error("❌ MongoDB connection failed:", error);
-
-    // rethrow for error handler OR exit
     throw new AppError("Failed to connect to MongoDB", 500);
-    // or process.exit(1); if you want to stop the app
   }
 };
 

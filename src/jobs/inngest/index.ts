@@ -1,8 +1,0 @@
-import { Inngest } from "inngest";
-import { autoDeactivateDevices } from "./functions";
-
-// Create a client to send and receive events
-export const inngest = new Inngest({ id: "my-app" });
-
-// Create an empty array where we'll export future Inngest functions
-export const functions = [autoDeactivateDevices];

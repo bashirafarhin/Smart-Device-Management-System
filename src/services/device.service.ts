@@ -90,10 +90,10 @@ export const deactivateDevice = async (deviceId: number) => {
   }
 };
 
-export async function invalidateDeviceListingCache(ownerId: number) {
+export const invalidateDeviceListingCache = async (ownerId: number) => {
   const pattern = `device-listing:userId=${ownerId}*`;
   const keys = await redisClient.keys(pattern);
   if (keys.length > 0) {
     await redisClient.del(keys);
   }
-}
+};

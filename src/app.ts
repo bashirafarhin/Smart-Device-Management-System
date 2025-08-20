@@ -5,9 +5,9 @@ import { errorHandler } from "./utils/errorHandler";
 import cookieParser from "cookie-parser";
 import authRoutes from "./routes/auth.route";
 import deviceRoutes from "./routes/device.route";
+import usageReportRouter from "./routes/usageReports.route";
 import { serve } from "inngest/express";
-import { inngest, functions } from "./jobs/inngest/index";
-import { rateLimiter } from "./middlewares/rateLimiter";
+import { inngest, functions } from "./backgroundJobs/inngest/index";
 import { requestLogger } from "./middlewares/requestLogger";
 import { responseTimeLogger } from "./middlewares/responseTimeLogger";
 dotenv.config();
@@ -27,13 +27,15 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use(requestLogger);
-app.use(responseTimeLogger);
-app.use("/auth", authRoutes);
-app.use("/devices", deviceRoutes);
-
 // background job route handler
 app.use("/api/inngest", serve({ client: inngest, functions }));
+
+app.use(requestLogger);
+app.use(responseTimeLogger);
+
+app.use("/auth", authRoutes);
+app.use("/devices", deviceRoutes);
+app.use("/usage-reports", usageReportRouter);
 
 app.use(errorHandler);
 

@@ -18,6 +18,7 @@ const UserSchema: Schema<IUser> = new Schema<IUser>(
     id: {
       type: Number,
       unique: true,
+      index: true,
     },
     name: {
       type: String,
@@ -30,6 +31,11 @@ const UserSchema: Schema<IUser> = new Schema<IUser>(
       unique: true,
       lowercase: true,
       trim: true,
+      index: true,
+      match: [
+        /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
+        "Please fill a valid email address",
+      ],
     },
     password: {
       type: String,
