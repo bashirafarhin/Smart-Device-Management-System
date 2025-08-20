@@ -1,6 +1,6 @@
 import app from "./app";
 import connectDB from "./db/connection";
-import { connectRedis } from "./config/redis";
+import { connectRedis } from "./config/redis.config";
 const PORT = process.env.PORT;
 
 async function startServer() {
