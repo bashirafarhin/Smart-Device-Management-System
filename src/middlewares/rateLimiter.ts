@@ -1,39 +1,47 @@
-import { Response, NextFunction } from "express";
-import { redisClient } from "../config/redis";
+import { NextFunction, Request, Response } from "express";
+import { redisClient } from "../config/redis.config";
 import { AuthRequest } from "./auth.middleware";
 
-const WINDOW_SIZE_IN_SECONDS = 60; // 1 minute
-const MAX_REQUESTS = 100;
+export interface RateLimiterRule {
+  endpoint: string;
+  rate_limit: {
+    time: number; // duration in seconds
+    limit: number; // max requests allowed within time
+  };
+}
 
-export const rateLimiter = async (
-  req: AuthRequest,
-  res: Response,
-  next: NextFunction
-) => {
-  try {
-    const identifier = req.user?.id || req.ip; // per user ID if logged in, else per IP
-    const key = `rate-limit:${identifier}`;
+export const rateLimiter = (rule: RateLimiterRule) => {
+  const { endpoint, rate_limit } = rule;
 
-    const current = await redisClient.get(key);
+  return async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      // Use user ID if authenticated, else IP address
+      const identifier = (req as AuthRequest).user?.id || req.ip;
+      const redisKey = `${endpoint}:${identifier}`;
 
-    if (current && parseInt(current) >= MAX_REQUESTS) {
-      return res
-        .status(429)
-        .json({ message: "Too many requests. Try again later." });
+      // Increment the number of requests for this key
+      const requests = await redisClient.incr(redisKey);
+
+      // If first request, set expiration to rate limit window
+      if (requests === 1) {
+        await redisClient.expire(redisKey, rate_limit.time);
+      }
+
+      // If request count exceeded limit, block request
+      if (requests > rate_limit.limit) {
+        const ttl = await redisClient.ttl(redisKey); // get seconds until reset
+        res.setHeader("Retry-After", ttl.toString());
+        return res.status(429).json({
+          message: `Too many requests. Please try again in ${ttl} seconds.`,
+        });
+      }
+
+      // Allow request
+      next();
+    } catch (error) {
+      console.error("Rate limiter error:", error);
+      // Optionally, allow on error or respond with 500
+      next();
     }
-
-    const tx = redisClient.multi();
-
-    if (!current) {
-      tx.set(key, "1", { EX: WINDOW_SIZE_IN_SECONDS });
-    } else {
-      tx.incr(key);
-    }
-
-    await tx.exec();
-    next();
-  } catch (err) {
-    console.error("Rate limiter error:", err);
-    next();
-  }
+  };
 };

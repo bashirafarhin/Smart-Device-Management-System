@@ -21,8 +21,14 @@ import {
   getDeviceUsage,
 } from "../controllers/deviceLog.controller";
 import { validateLogEntry } from "../middlewares/validations/deviceLog.validation";
+import { rateLimiter } from "../middlewares/rateLimiter";
 
 const router = Router();
+
+const deviceRateLimiter = rateLimiter({
+  endpoint: "device",
+  rate_limit: { time: 15 * 60, limit: 100 }, // 100 requests per 15 minutes
+});
 
 router.post(
   "/",
@@ -32,14 +38,37 @@ router.post(
   registerDevice
 );
 
-router.get("/", authMiddleware, validateDeviceQuery, getDevices);
-router.patch("/:id", authMiddleware, validateDeviceUpdate, updateDevice);
-router.delete("/:id", authMiddleware, deleteDevice);
-router.post("/:id/heartbeat", authMiddleware, recordHeartbeat);
+router.get(
+  "/",
+  authMiddleware,
+  deviceRateLimiter,
+  validateDeviceQuery,
+  getDevices
+);
+router.patch(
+  "/:id",
+  authMiddleware,
+  deviceRateLimiter,
+  validateDeviceUpdate,
+  updateDevice
+);
+router.delete("/:id", authMiddleware, deviceRateLimiter, deleteDevice);
+router.post(
+  "/:id/heartbeat",
+  authMiddleware,
+  deviceRateLimiter,
+  recordHeartbeat
+);
 
 // device Logs routes
-router.post("/:id/logs", authMiddleware, validateLogEntry, createLog);
-router.get("/:id/logs", authMiddleware, getDeviceLogs);
-router.get("/:id/usage", authMiddleware, getDeviceUsage);
+router.post(
+  "/:id/logs",
+  authMiddleware,
+  deviceRateLimiter,
+  validateLogEntry,
+  createLog
+);
+router.get("/:id/logs", authMiddleware, deviceRateLimiter, getDeviceLogs);
+router.get("/:id/usage", authMiddleware, deviceRateLimiter, getDeviceUsage);
 
 export default router;
