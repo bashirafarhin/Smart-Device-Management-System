@@ -9,6 +9,7 @@ import { serve } from "inngest/express";
 import { inngest, functions } from "./jobs/inngest/index";
 import { rateLimiter } from "./middlewares/rateLimiter";
 import { requestLogger } from "./middlewares/requestLogger";
+import { responseTimeLogger } from "./middlewares/responseTimeLogger";
 dotenv.config();
 
 const app = express();
@@ -25,7 +26,9 @@ app.use(
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
 app.use(requestLogger);
+app.use(responseTimeLogger);
 app.use("/auth", authRoutes);
 app.use("/devices", deviceRoutes);
 

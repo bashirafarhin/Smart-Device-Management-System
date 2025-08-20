@@ -125,7 +125,6 @@ export const getProfile = async (req: AuthRequest, res: Response) => {
     }
     res.status(200).json({ success: true, data: profile });
   } catch (error) {
-    console.error("Error fetching user profile:", error);
     res.status(500).json({ message: "Internal server error" });
   }
 };
