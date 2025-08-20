@@ -1,36 +1,51 @@
 import { Request, Response, NextFunction } from "express";
-import { AppError } from "../utils/errorHandler";
 import jwt from "jsonwebtoken";
-
-interface JwtPayload {
-  id: number;
-  email: string;
-  role: string;
-}
+import BlacklistToken from "../models/blacklistToken.model";
+import { TokenPayload } from "../types/tokens";
 
 export interface AuthRequest extends Request {
-  user?: JwtPayload;
+  user?: any;
+  tokenId?: string;
 }
 
-export const authMiddleware = (
+export const authMiddleware = async (
   req: AuthRequest,
-  _res: Response,
+  res: Response,
   next: NextFunction
 ) => {
   const authHeader = req.headers.authorization;
 
   if (!authHeader || !authHeader.startsWith("Bearer ")) {
-    return next(new AppError("Unauthorized: No token provided", 401));
+    return res.status(401).json({ message: "Unauthorized: No token provided" });
   }
   const token = authHeader.split(" ")[1];
+
   try {
     const decoded = jwt.verify(
       token,
-      process.env.JWT_SECRET as string
-    ) as JwtPayload;
+      process.env.ACCESS_TOKEN_SECRET as string
+    ) as TokenPayload;
+
+    if (!decoded.jti) {
+      return res
+        .status(401)
+        .json({ message: "Unauthorized: Token missing identifier" });
+    }
+
+    const blacklisted = await BlacklistToken.findOne({
+      token: decoded.jti,
+      type: "access",
+    });
+    if (blacklisted) {
+      return res.status(401).json({ message: "Unauthorized: Token revoked" });
+    }
+
     req.user = decoded;
     next();
-  } catch (err) {
-    return next(new AppError("Unauthorized: Invalid token", 401));
+  } catch (error: any) {
+    if (error.name === "TokenExpiredError") {
+      return res.status(401).json({ message: "Unauthorized: Token expired" });
+    }
+    return res.status(401).json({ message: "Unauthorized: Invalid token" });
   }
 };

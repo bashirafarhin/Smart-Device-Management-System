@@ -1,5 +1,11 @@
 import { Router } from "express";
-import { login, signup } from "../controllers/auth.controller";
+import {
+  login,
+  signup,
+  logout,
+  refreshTokenHandler,
+} from "../controllers/auth.controller";
+
 import { check } from "express-validator";
 import {
   validateSignup,
@@ -7,6 +13,7 @@ import {
   validateRole,
 } from "../middlewares/validations/auth.validation";
 import { validateRequest } from "../utils/validateRequest";
+import { authMiddleware } from "../middlewares/auth.middleware";
 
 const router = Router();
 
@@ -21,5 +28,9 @@ router.post(
   ],
   login
 );
+
+router.post("/logout", authMiddleware, logout);
+
+router.post("/refresh-token", refreshTokenHandler);
 
 export default router;
