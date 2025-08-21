@@ -22,6 +22,7 @@ import {
   exportDeviceLogs,
   submitLargeExportJob,
   getJobStatus,
+  getDevicesUsageReport,
 } from "../controllers/deviceLog.controller";
 import { validateLogEntry } from "../middlewares/validations/deviceLog.validation";
 import { rateLimiter } from "../middlewares/rateLimiter";
@@ -73,6 +74,8 @@ router.post(
 );
 router.get("/:id/logs", authMiddleware, deviceRateLimiter, getDeviceLogs);
 router.get("/:id/usage", authMiddleware, deviceRateLimiter, getDeviceUsage);
+
+router.get("/usage-reports", authMiddleware, getDevicesUsageReport);
 
 // data exports for smaller range
 router.get(

@@ -1,7 +1,7 @@
 {
   "info": {
-    "_postman_id": "4f00dc20-c3f5-4bef-80f6-c74d89f755c6",
-    "name": "SDMS",
+    "_postman_id": "14b6f513-93a9-46cc-8fbc-b7edbdb7512f",
+    "name": "SDMS Copy",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
     "_exporter_id": "29100079"
   },
@@ -56,6 +56,67 @@
             }
           },
           "response": []
+        },
+        {
+          "name": "logout",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJqb2huQGV4YW1wbGUuY29tIiwicm9sZSI6InVzZXIiLCJqdGkiOiIxOGQ1YzNhNDlhODcwY2M4OWMxZTZmZTI2OGI0OTM2MCIsImlhdCI6MTc1NTc1MTYzMiwiZXhwIjoxNzU1NzUyNTMyfQ.WIYJcFt93Xfyi3GW4E34JvrbLO5oLo9uDINECNeRR6Q",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"email\": \"john@example.com\",\r\n  \"password\": \"Ba@123456\"\r\n}\r\n\r\n"
+            },
+            "url": {
+              "raw": "http://localhost:3000/auth/logout",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["auth", "logout"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "refresh-token",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/auth/refresh-token",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["auth", "refresh-token"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "profile",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJqb2huQGV4YW1wbGUuY29tIiwicm9sZSI6InVzZXIiLCJqdGkiOiIxMWZmMmY1NzdkMmM3OWVmNjViMjVjM2RhZjkzMDI0MCIsImlhdCI6MTc1NTc1MTY2NywiZXhwIjoxNzU1NzUyNTY3fQ.6dF5RzWmZ7btKGK5-21vgIFOjpycfZ717TSrpxXZGRQ",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:3000/auth/profile",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["auth", "profile"]
+            }
+          },
+          "response": []
         }
       ]
     },
@@ -69,7 +130,7 @@
             "header": [
               {
                 "key": "Authorization",
-                "value": "Bearer <your_jwt_token>",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJqb2huQGV4YW1wbGUuY29tIiwicm9sZSI6InVzZXIiLCJqdGkiOiIxMWZmMmY1NzdkMmM3OWVmNjViMjVjM2RhZjkzMDI0MCIsImlhdCI6MTc1NTc1MTY2NywiZXhwIjoxNzU1NzUyNTY3fQ.6dF5RzWmZ7btKGK5-21vgIFOjpycfZ717TSrpxXZGRQ",
                 "type": "text"
               }
             ],
@@ -99,7 +160,7 @@
             "header": [
               {
                 "key": "Authorization",
-                "value": "Bearer <your_jwt_token>",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJqb2huQGV4YW1wbGUuY29tIiwicm9sZSI6InVzZXIiLCJqdGkiOiIxMWZmMmY1NzdkMmM3OWVmNjViMjVjM2RhZjkzMDI0MCIsImlhdCI6MTc1NTc1MTY2NywiZXhwIjoxNzU1NzUyNTY3fQ.6dF5RzWmZ7btKGK5-21vgIFOjpycfZ717TSrpxXZGRQ",
                 "type": "text"
               }
             ],
@@ -120,7 +181,7 @@
             "header": [
               {
                 "key": "Authorization",
-                "value": "Bearer <your_jwt_token>",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJqb2huQGV4YW1wbGUuY29tIiwicm9sZSI6InVzZXIiLCJqdGkiOiIxMWZmMmY1NzdkMmM3OWVmNjViMjVjM2RhZjkzMDI0MCIsImlhdCI6MTc1NTc1MTY2NywiZXhwIjoxNzU1NzUyNTY3fQ.6dF5RzWmZ7btKGK5-21vgIFOjpycfZ717TSrpxXZGRQ",
                 "type": "text"
               }
             ],
@@ -150,7 +211,7 @@
             "header": [
               {
                 "key": "Authorization",
-                "value": "Bearer <your_jwt_token>",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJqb2huQGV4YW1wbGUuY29tIiwicm9sZSI6InVzZXIiLCJqdGkiOiIxMWZmMmY1NzdkMmM3OWVmNjViMjVjM2RhZjkzMDI0MCIsImlhdCI6MTc1NTc1MTY2NywiZXhwIjoxNzU1NzUyNTY3fQ.6dF5RzWmZ7btKGK5-21vgIFOjpycfZ717TSrpxXZGRQ",
                 "type": "text"
               }
             ],
@@ -185,7 +246,7 @@
             "header": [
               {
                 "key": "Authorization",
-                "value": "Bearer <your_jwt_token>",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJqb2huQGV4YW1wbGUuY29tIiwicm9sZSI6InVzZXIiLCJqdGkiOiIxMWZmMmY1NzdkMmM3OWVmNjViMjVjM2RhZjkzMDI0MCIsImlhdCI6MTc1NTc1MTY2NywiZXhwIjoxNzU1NzUyNTY3fQ.6dF5RzWmZ7btKGK5-21vgIFOjpycfZ717TSrpxXZGRQ",
                 "type": "text"
               }
             ],
@@ -218,7 +279,7 @@
             "header": [
               {
                 "key": "Authorization",
-                "value": "Bearer <your_jwt_token>",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJqb2huQGV4YW1wbGUuY29tIiwicm9sZSI6InVzZXIiLCJqdGkiOiIxMWZmMmY1NzdkMmM3OWVmNjViMjVjM2RhZjkzMDI0MCIsImlhdCI6MTc1NTc1MTY2NywiZXhwIjoxNzU1NzUyNTY3fQ.6dF5RzWmZ7btKGK5-21vgIFOjpycfZ717TSrpxXZGRQ",
                 "type": "text"
               }
             ],
@@ -232,11 +293,17 @@
               }
             },
             "url": {
-              "raw": "http://localhost:3000/devices/d1/logs",
+              "raw": "http://localhost:3000/devices/d1/logs?limit=5",
               "protocol": "http",
               "host": ["localhost"],
               "port": "3000",
-              "path": ["devices", "d1", "logs"]
+              "path": ["devices", "d1", "logs"],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "5"
+                }
+              ]
             }
           },
           "response": []
@@ -248,12 +315,12 @@
             "header": [
               {
                 "key": "Authorization",
-                "value": "Bearer <your_jwt_token>",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJqb2huQGV4YW1wbGUuY29tIiwicm9sZSI6InVzZXIiLCJqdGkiOiIxMWZmMmY1NzdkMmM3OWVmNjViMjVjM2RhZjkzMDI0MCIsImlhdCI6MTc1NTc1MTY2NywiZXhwIjoxNzU1NzUyNTY3fQ.6dF5RzWmZ7btKGK5-21vgIFOjpycfZ717TSrpxXZGRQ",
                 "type": "text"
               }
             ],
             "url": {
-              "raw": "http://localhost:3000/devices/d1/usage?range=1h",
+              "raw": "http://localhost:3000/devices/d1/usage?range=25",
               "protocol": "http",
               "host": ["localhost"],
               "port": "3000",
@@ -261,8 +328,96 @@
               "query": [
                 {
                   "key": "range",
-                  "value": "1h"
+                  "value": "25"
                 }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "export logs",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJqb2huQGV4YW1wbGUuY29tIiwicm9sZSI6InVzZXIiLCJqdGkiOiIwMGZkOGMwM2JmNDhjNTFhMjFlNTQyM2FhMzY1NzY5YSIsImlhdCI6MTc1NTc1MTgwMywiZXhwIjoxNzU1NzUyNzAzfQ.Ak88kjjSvm7wrnFaQcjkAnQxiCodI7p6aJaIG8F5Xk8",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:3000/devices/d1/logs/export?startDate=2025-08-01&endDate=2025-08-23",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["devices", "d1", "logs", "export"],
+              "query": [
+                {
+                  "key": "startDate",
+                  "value": "2025-08-01"
+                },
+                {
+                  "key": "endDate",
+                  "value": "2025-08-23"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "export large data logs",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJqb2huQGV4YW1wbGUuY29tIiwicm9sZSI6InVzZXIiLCJqdGkiOiJjMTg4NTljNzhjN2U4MGNhYWIwODFhYjQ0NGU5Y2E3YSIsImlhdCI6MTc1NTc1MTkwOSwiZXhwIjoxNzU1NzUyODA5fQ.fUkwVQ1WLX8ABYVRaUc5QOQnwz6lLXiBIM1aWmMfW5M",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"deviceId\": \"d1\",\r\n  \"startDate\": \"2025-08-01\",\r\n  \"endDate\": \"2025-08-21\",\r\n  \"format\": \"csv\"\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/devices/exports/large",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["devices", "exports", "large"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "check job status of large data export",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJqb2huQGV4YW1wbGUuY29tIiwicm9sZSI6InVzZXIiLCJqdGkiOiJjMTg4NTljNzhjN2U4MGNhYWIwODFhYjQ0NGU5Y2E3YSIsImlhdCI6MTc1NTc1MTkwOSwiZXhwIjoxNzU1NzUyODA5fQ.fUkwVQ1WLX8ABYVRaUc5QOQnwz6lLXiBIM1aWmMfW5M",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:3000/devices/exports/large/d777e09e-d29b-4d84-9484-1b4c1e92249c/status",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": [
+                "devices",
+                "exports",
+                "large",
+                "d777e09e-d29b-4d84-9484-1b4c1e92249c",
+                "status"
               ]
             }
           },
@@ -277,16 +432,16 @@
         "header": [
           {
             "key": "Authorization",
-            "value": "Bearer <your_jwt_token>",
+            "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJqb2huQGV4YW1wbGUuY29tIiwicm9sZSI6InVzZXIiLCJqdGkiOiJjMTg4NTljNzhjN2U4MGNhYWIwODFhYjQ0NGU5Y2E3YSIsImlhdCI6MTc1NTc1MTkwOSwiZXhwIjoxNzU1NzUyODA5fQ.fUkwVQ1WLX8ABYVRaUc5QOQnwz6lLXiBIM1aWmMfW5M",
             "type": "text"
           }
         ],
         "url": {
-          "raw": "http://localhost:3000/devices/d1",
+          "raw": "http://localhost:3000/devices/d6",
           "protocol": "http",
           "host": ["localhost"],
           "port": "3000",
-          "path": ["devices", "d1"]
+          "path": ["devices", "d6"]
         }
       },
       "response": []

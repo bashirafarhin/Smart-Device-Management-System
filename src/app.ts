@@ -5,7 +5,6 @@ import { errorHandler } from "./utils/errorHandler";
 import cookieParser from "cookie-parser";
 import authRoutes from "./routes/auth.route";
 import deviceRoutes from "./routes/device.route";
-import usageReportRouter from "./routes/usageReports.route";
 import { serve } from "inngest/express";
 import { inngest, functions } from "./backgroundJobs/inngest/index";
 import { requestLogger } from "./middlewares/requestLogger";
@@ -35,7 +34,6 @@ app.use(responseTimeLogger);
 
 app.use("/auth", authRoutes);
 app.use("/devices", deviceRoutes);
-app.use("/usage-reports", usageReportRouter);
 
 app.use(errorHandler);
 
