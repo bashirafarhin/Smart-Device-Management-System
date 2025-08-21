@@ -93,3 +93,25 @@ npm run dev
 - The assignment did not explicitly mention whether the routes should be protected, but it was assumed that authentication is required for all protected resources (e.g., Device Management, Logs, Usage). Therefore, these routes are secured with JWT-based authentication.
 
 ## [📖 Go to API Documentation](./API_DOCS.md)
+
+## 📊 Watch Performance Optimization Proofs
+
+### 1. device listing
+
+#### without cache-158ms
+
+![screenshot](public/dlwc.png)
+
+#### with cache-98ms
+
+![screenshot](public/dlwithc.png)
+
+### 2. user's profile
+
+#### without cache-122ms
+
+![screenshot](public/upwc.png)
+
+#### with cache-107ms
+
+![screenshot](public/upwithc.png)
