@@ -1,6 +1,9 @@
 # Smart Device Management System
 
-> This project was built to match these requirements [Assignment](https://github.com/bashirafarhin/Smart-Device-Management-System/blob/main/Assignment.pdf).
+> This project was built to match these requirements
+
+- [Assignment1](./Assignment1.pdf)
+- [Assignment2](./Assignment2.pdf)
 
 ## 🛠️ Tech Used
 
@@ -10,12 +13,12 @@
 - **JWT + bcrypt**
 - **bcryptjs**
 - **express-validator**
-- **inngest**(to implement background job)
+- **inngest**(to implement background jobs)
 - **jsonwebtoken**
 - **mongoose**
-- **redis**(to implement rate limiting)
+- **redis**(to implement rate limiting middlewares)
 - **Jest**(to implement unit testing)
-  
+
 ## 📬 Postman Collection
 
 You can explore and test the APIs using the Postman collection:
@@ -30,7 +33,7 @@ You can explore and test the APIs using the Postman collection:
 
 ```bash
 git clone https://github.com/bashirafarhin/Smart-Device-Management-System.git
-cd ./Smart-Device-Management-System/
+cd ./Smart-Device-Management-System
 ```
 
 ### 2. Install Dependencies
@@ -46,6 +49,7 @@ npm install/ npm i
   `mongodb+srv://<username>:<password>@cluster0.mongodb.net/your-db-name`).
 - Add it to your `.env` file:
 - If you prefer using local MongoDB, make sure it is running:
+  `Open new terminal and run this`
 
 ```bash
 mongod
@@ -58,16 +62,27 @@ mongod
   `redis://default:<password>@<host>:<port>`).
 - Add it to your `.env` file:
 
-### 5. Configure Environment Variables
+### 5. Inngest setup
+
+`Open new terminal and run this`
+
+```bash
+npx inngest-cli@latest dev -u http://localhost:3000/api/inngest
+```
+
+### 6. Configure Environment Variables
 
 ```bash
 PORT=3000
 MONGO_URI=
-JWT_SECRET=your-secret-key
+JWT_SECRET=your-jwt-secret-key
 REDIS_URL=
+ACCESS_TOKEN_SECRET=your-access-secret-key
+REFRESH_TOKEN_SECRET=your-refresh-secret-key
+NODE_ENV = "development"
 ```
 
-### 6. Run the Project in Development Mode
+### 7. Run the Project in Development Mode
 
 ```bash
 npm run dev
