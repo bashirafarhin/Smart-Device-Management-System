@@ -7,8 +7,8 @@ import authRoutes from "./routes/auth.route";
 import deviceRoutes from "./routes/device.route";
 import { serve } from "inngest/express";
 import { inngest, functions } from "./backgroundJobs/inngest/index";
-import { requestLogger } from "./middlewares/requestLogger";
-import { responseTimeLogger } from "./middlewares/responseTimeLogger";
+import { requestLogger } from "./middlewares/requestLogger.middleware";
+import { responseTimeLogger } from "./middlewares/responseTimeLogger.middleware";
 dotenv.config();
 
 const app = express();

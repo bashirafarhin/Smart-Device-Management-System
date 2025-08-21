@@ -15,7 +15,7 @@ import {
 } from "../middlewares/validations/auth.validation";
 import { validateRequest } from "../utils/validateRequest";
 import { authMiddleware } from "../middlewares/auth.middleware";
-import { rateLimiter } from "../middlewares/rateLimiter";
+import { rateLimiter } from "../middlewares/rateLimiter.middleware";
 
 const router = Router();
 

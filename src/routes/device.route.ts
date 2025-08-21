@@ -25,7 +25,7 @@ import {
   getDevicesUsageReport,
 } from "../controllers/deviceLog.controller";
 import { validateLogEntry } from "../middlewares/validations/deviceLog.validation";
-import { rateLimiter } from "../middlewares/rateLimiter";
+import { rateLimiter } from "../middlewares/rateLimiter.middleware";
 
 const router = Router();
 

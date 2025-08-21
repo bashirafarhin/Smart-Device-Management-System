@@ -7,7 +7,7 @@ export const requestLogger = (
 ) => {
   const method = req.method;
   const url = req.originalUrl || req.url;
-  const ip = req.ip || req.connection.remoteAddress || "unknown";
+  const ip = req.ip || req.socket?.remoteAddress || "unknown";
   const timestamp = new Date().toISOString();
 
   console.log(`[${timestamp}] ${method} ${url} - IP: ${ip}`);
